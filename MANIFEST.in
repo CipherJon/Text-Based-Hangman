@@ -1,0 +1,6 @@
+# Manifest file for the hangman game
+
+include README.md
+include requirements.txt
+include setup.py
+include LICENSE

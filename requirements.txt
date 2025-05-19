@@ -1,0 +1,3 @@
+# List of dependencies for the hangman game
+
+# You can add more dependencies here if needed
