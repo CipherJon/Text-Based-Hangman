@@ -1,3 +1,8 @@
+from data import Data
+import random
+import data
+import random
+import data
 import random
 
 class Game:
@@ -9,8 +14,8 @@ class Game:
 
     def start(self, player_name):
         print(f"Welcome to Hangman, {player_name}!")
-        while self.lives > 0 and "_" in self.word:
-            print("Word:", "".join(["_" if letter not in self.guesses else letter for letter in self.word]))
+        while self.lives > 0 and not all(letter in self.guesses for letter in self.word):
+            print("Word:", " ".join(["_" if letter not in self.guesses else letter for letter in self.word]))
             guess = input("Guess a letter: ").lower()
             if len(guess) != 1 or not guess.isalpha():
                 print("Invalid input. Please enter a single alphabetic character.")
@@ -24,7 +29,7 @@ class Game:
             else:
                 print(f"Incorrect! '{guess}' is not in the word. You lose a life.")
                 self.lives -= 1
-        if "_" in self.word:
+        if not all(letter in self.guesses for letter in self.word):
             print(f"You lost! The word was '{self.word}'.")
         else:
             print(f"Congratulations, {player_name}! You won!")

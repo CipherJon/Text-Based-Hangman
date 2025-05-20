@@ -1,4 +1,5 @@
 import random
+import data
 
 class Hangman:
     def __init__(self):
@@ -9,7 +10,7 @@ class Hangman:
 
     def start(self, player_name):
         print(f"Welcome to Hangman, {player_name}!")
-        while self.lives > 0 and "_" in self.word:
+        while self.lives > 0 and not all(letter in self.guesses for letter in self.word):
             print("Word:", "".join(["_" if letter not in self.guesses else letter for letter in self.word]))
             guess = input("Guess a letter: ").lower()
             if len(guess) != 1 or not guess.isalpha():
@@ -24,22 +25,21 @@ class Hangman:
             else:
                 print(f"Incorrect! '{guess}' is not in the word. You lose a life.")
                 self.lives -= 1
-        if "_" in self.word:
+        if not all(letter in self.guesses for letter in self.word):
             print(f"You lost! The word was '{self.word}'.")
         else:
             print(f"Congratulations, {player_name}! You won with {len(self.guesses)} guesses left.")
 
 def main():
     import sys
-    from hangman import Hangman
-
+    
     if len(sys.argv) > 1:
         player_name = sys.argv[1]
     else:
         player_name = input("Enter your name: ")
-
+    
     game = Hangman()
     game.start(player_name)
-
+    
 if __name__ == "__main__":
     main()
